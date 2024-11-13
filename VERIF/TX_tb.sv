@@ -27,10 +27,11 @@ module TX_tb;
     TXDATA = 0;
     TX_RQ = 0;
     TXC = 0;
-
+    @(negedge TX_BUSY);
     // Apply test vectors
     #10 TXDATA = 8'b10101010; TX_RQ = 1;
     #20 TX_RQ = 0;
+    @(negedge TX_BUSY);
     #30 TXDATA = 8'b11001100; TX_RQ = 1;
     #40 TX_RQ = 0;
 
