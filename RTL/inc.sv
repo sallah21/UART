@@ -9,7 +9,7 @@ module inc #(
    output [SIZE-1:0] Q
 );
     
-    reg [SIZE-1:0] Q_r;
+    reg [SIZE-1:0] Q_r = {SIZE {1'b0}};
 
     always @(posedge CLK or posedge R) begin
         if (R) begin
@@ -24,4 +24,5 @@ module inc #(
             end
         end
     end
+    assign Q = Q_r;
 endmodule

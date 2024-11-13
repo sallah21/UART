@@ -3,22 +3,22 @@
 rm -f TX_tb
 rm -f TX_tb.vcd
 clear
-iverilog -Wall -g2012 -s TX -o TX_tb ./RTL/TX.sv ./RTL/inc.sv ./RTL/MUX.sv
+iverilog -Wall -g2012 -s TX_tb -o TX_tb ./RTL/TX.sv ./RTL/inc.sv ./RTL/MUX.sv ./VERIF/TX_tb.sv
+
 
 if [ $? -eq 1 ]; then
     echo Source compilation failure
     exit 1
 fi
 
-vvp TX_tb
+vvp -l log.txt TX_tb
 
 if [ $? -ne 0 ]; then
     echo Running simulation failure
     exit 1
 fi
 
-gtkwave TX_tb.vcd
-
+gtkwave TX_tb.gtkw
 
 if [$? -ne 0]; then
     echo GTKWave failure
