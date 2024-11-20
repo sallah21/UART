@@ -8,5 +8,6 @@ module MUX #(
     input [$clog2(SIZE):0] ADDR,
     output D
 );
-assign D = TX_DATA[ADDR];
+wire D_w = TX_DATA[(SIZE+1)-ADDR] ;
+assign D = D_w;
 endmodule

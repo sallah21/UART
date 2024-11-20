@@ -34,7 +34,7 @@ module TX_tb;
     @(negedge TX_BUSY);
     #30 TXDATA = 8'b11001100; TX_RQ = 1;
     #40 TX_RQ = 0;
-
+    #1000;
     // Add more test cases as needed
     #50 $finish;
   end

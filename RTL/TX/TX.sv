@@ -18,7 +18,7 @@ wire inc_r = ~inc_ce & TX_RQ;
 
 wire [$clog2(SIZE):0] Q_w;
 
-inc #(.SIZE(4)) inc_inst (
+INC #(.SIZE(4)) inc_inst (
     .CLK(TXC),
     .CE(inc_ce),
     .R(inc_r),
@@ -32,7 +32,7 @@ inc #(.SIZE(4)) inc_inst (
 wire D_w;
 
 MUX #(.SIZE(8)) MUX_inst (
-     .TX_DATA({1'b1,{TXDATA}, 1'b0}),
+     .TX_DATA({1'b0,{TXDATA}, 1'b1}),
      .ADDR(Q_w),
      .D(D_w)
 );
@@ -41,10 +41,10 @@ MUX #(.SIZE(8)) MUX_inst (
 //////// OUTPUT REG LOGIC 
 ////////////////////////////////////////////////////////////////
 
-    reg TXD_r;
-    always @(posedge TXC) begin
-        TXD_r <= D_w;
-    end
+reg TXD_r;
+always @(posedge TXC) begin
+    TXD_r <= D_w;
+end
 
 assign TXD = TXD_r;
 assign TX_BUSY = inc_ce;

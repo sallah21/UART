@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Wed Nov 13 15:42:21 2024
+[*] Wed Nov 20 12:40:03 2024
 [*]
 [dumpfile] "/home/student/Documents/DS/S2/Metody_komunikacji_cyfrowej/Lab_2/TX_tb.vcd"
-[dumpfile_mtime] "Wed Nov 13 15:41:54 2024"
-[dumpfile_size] 2495
+[dumpfile_mtime] "Wed Nov 20 12:39:38 2024"
+[dumpfile_size] 4459
 [savefile] "/home/student/Documents/DS/S2/Metody_komunikacji_cyfrowej/Lab_2/TX_tb.gtkw"
 [timestart] 0
 [size] 1848 1016
 [pos] -1 -1
-*-15.000000 105000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-15.000000 31700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TX_tb.
 [treeopen] TX_tb.uut.
 [sst_width] 233
@@ -48,6 +48,8 @@ TX_tb.uut.MUX_inst.ADDR[3:0]
 @28
 TX_tb.uut.MUX_inst.D
 @29
+TX_tb.uut.MUX_inst.D_w
+@28
 TX_tb.uut.MUX_inst.TX_DATA[9:0]
 [pattern_trace] 1
 [pattern_trace] 0
