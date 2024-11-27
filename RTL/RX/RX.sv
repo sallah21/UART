@@ -14,18 +14,18 @@ logic RX_END;
 logic sum_mux_up;
 logic sum_mux_down;
 logic RX_SAMPLE;
-reg sum_r;
+reg sum_r = 'd0;
 
 always @(posedge clk) begin
-    sum_r = sum_mux_up + sum_mux_down;
+    sum_r <= sum_mux_up + sum_mux_down;
     
-    RX_END = (sum_r == 8'd152)? 1'b1 : 1'b0 ;
+    RX_END <= (sum_r == 8'd152)? 1'b1 : 1'b0 ;
 
-    sum_mux_up = (RX_END && (!RXD))? 'd0 : sum_r;
+    sum_mux_up <= (RX_END && (!RXD))? 'd0 : sum_r;
 
-    sum_mux_down = (RXC && (!RX_END))? 'd1 : 'd0;
+    sum_mux_down <= (RXC && (!RX_END))? 'd1 : 'd0;
 
-    RX_SAMPLE = 
+    RX_SAMPLE <= 
     ((sum_r=='d7)? 1'b1: 1'b0 ) &&
     (!((sum_r=='d148)? 1'b1: 1'b0 )) &&
     (RXC) ;
