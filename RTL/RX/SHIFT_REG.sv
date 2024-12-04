@@ -5,6 +5,7 @@ module SHIFT_REG #(
 )(
     input CLK,
     input DATA_IN,
+    input RXEN,
     output [SIZE-1:0] DATA_OUT
 );
 
@@ -15,13 +16,17 @@ genvar i;
 generate
     for (i = SIZE-1; i > 0; i = i - 1) begin : shift_logic
         always @(posedge CLK) begin
-            DATA_OUT_r[i] <= DATA_OUT_r[i-1];
+            if (RXEN) begin
+                DATA_OUT_r[i] <= DATA_OUT_r[i-1];    
+            end
         end
     end
 endgenerate
 
 always @(posedge CLK) begin
-    DATA_OUT_r[0] <= DATA_IN;
+    if (RXEN) begin
+        DATA_OUT_r[0] <= DATA_IN;    
+    end
 end
 
 endmodule

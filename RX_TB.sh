@@ -3,7 +3,7 @@
 rm -f TX_tb
 rm -f TX_tb.vcd
 clear
-iverilog -Wall -g2012 -s RX_tb -o RX_tb ./RTL/RX/RX.sv ./VERIF/RX_tb.sv
+iverilog -Wall -g2012 -s RX_tb -o RX_tb ./RTL/RX/RX.sv ./RTL/RX/INPUT_FILTER.sv ./VERIF/RX_tb.sv
 
 
 if [ $? -eq 1 ]; then
