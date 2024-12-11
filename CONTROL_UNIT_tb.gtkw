@@ -1,0 +1,31 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Wed Dec 11 12:40:17 2024
+[*]
+[dumpfile] "/home/student/Documents/DS/S2/Metody_komunikacji_cyfrowej/Lab_2/CONTROL_UNIT_tb.vcd"
+[dumpfile_mtime] "Wed Dec 11 12:39:34 2024"
+[dumpfile_size] 806
+[savefile] "/home/student/Documents/DS/S2/Metody_komunikacji_cyfrowej/Lab_2/CONTROL_UNIT_tb.gtkw"
+[timestart] 0
+[size] 1848 1016
+[pos] -39 -39
+*-14.631031 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] CONTROL_UNIT_tb.
+[sst_width] 233
+[signals_width] 222
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@28
+CONTROL_UNIT_tb.uut.CLK
+CONTROL_UNIT_tb.uut.RXC
+CONTROL_UNIT_tb.uut.RXD
+CONTROL_UNIT_tb.uut.RXD_prev_reg
+CONTROL_UNIT_tb.uut.RXEN
+CONTROL_UNIT_tb.uut.RXEN_reg
+CONTROL_UNIT_tb.uut.RXRDY
+@22
+CONTROL_UNIT_tb.uut.data_cnt_reg[8:0]
+@28
+CONTROL_UNIT_tb.uut.ongoing_transmission_reg
+[pattern_trace] 1
+[pattern_trace] 0
