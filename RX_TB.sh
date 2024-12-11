@@ -3,7 +3,7 @@
 rm -f TX_tb
 rm -f TX_tb.vcd
 clear
-iverilog -Wall -g2012 -s RX_tb -o RX_tb ./RTL/RX/RX.sv ./RTL/RX/INPUT_FILTER.sv ./VERIF/RX_tb.sv
+iverilog -Wall -g2012 -s RX_tb -o RX_tb ./RTL/RX/RX.sv ./RTL/RX/INPUT_FILTER.sv ./RTL/RX/BAUD_GENERATOR.sv ./RTL/RX/SHIFT_REG.sv ./RTL/RX/CONTROL_UNIT.sv  ./VERIF/RX_tb.sv
 
 
 if [ $? -eq 1 ]; then
@@ -11,7 +11,7 @@ if [ $? -eq 1 ]; then
     exit 1
 fi
 
-vvp -l log.txt RX_tb
+vvp -l RX_tb_log.txt RX_tb
 
 if [ $? -ne 0 ]; then
     echo Running simulation failure

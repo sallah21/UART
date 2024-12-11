@@ -5,16 +5,15 @@ module RX_tb;
 // Testbench signals
 reg clk;
 reg RXD;
-reg RXC;
-wire RX_END;
+
+wire RX_READY;
 wire [7:0] DQ;
 
 // Instantiate the RX module
 RX uut (
-    .clk(clk),
+    .CLK(clk),
     .RXD(RXD),
-    .RXC(RXC),
-    .RX_END(RX_END),
+    .RX_READY(RX_READY),
     .DQ(DQ)
 );
 
@@ -30,33 +29,33 @@ initial begin
     $dumpvars(0, RX_tb);
     // Initialize inputs
     RXD = 0;
-    RXC = 0;
+
 
     // Apply test vectors
     #10 RXD = 1;
-    #10 RXC = 1;
+
     #10 RXD = 0;
-    #10 RXC = 0;
+
     #10 RXD = 1;
-    #10 RXC = 1;
+
     
     // More test vectors to thoroughly test the module
     #10 RXD = 0;
-    #10 RXC = 0;
+
     #10 RXD = 1;
-    #10 RXC = 1;
+
     #10 RXD = 0;
-    #10 RXC = 0;
+
     #10 RXD = 1;
-    #10 RXC = 1;
+
     
     // End the simulation after a few cycles
     #100 $finish;
 end
 
-// Monitor
-initial begin
-    $monitor("Time=%0t | RXD=%b | RXC=%b | RX_END=%b | DQ=%b", $time, RXD, RXC, RX_END, DQ);
-end
+// // Monitor
+// initial begin
+//     $monitor("Time=%0t | RXD=%b | RXC=%b | RX_END=%b | DQ=%b", $time, RXD, RXC, RX_END, DQ);
+// end
 
 endmodule

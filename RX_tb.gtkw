@@ -1,33 +1,72 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Wed Nov 27 13:37:06 2024
+[*] Wed Dec 11 13:56:59 2024
 [*]
 [dumpfile] "/home/student/Documents/DS/S2/Metody_komunikacji_cyfrowej/Lab_2/RX_tb.vcd"
-[dumpfile_mtime] "Wed Nov 27 13:36:39 2024"
-[dumpfile_size] 1260
+[dumpfile_mtime] "Wed Dec 11 13:51:03 2024"
+[dumpfile_size] 2544
 [savefile] "/home/student/Documents/DS/S2/Metody_komunikacji_cyfrowej/Lab_2/RX_tb.gtkw"
 [timestart] 0
 [size] 1848 1016
-[pos] -51 -51
-*-16.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -39 -39
+*-16.000000 47500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] RX_tb.
+[treeopen] RX_tb.uut.
 [sst_width] 233
-[signals_width] 142
+[signals_width] 222
 [sst_expanded] 1
 [sst_vpaned_height] 289
-@22
-RX_tb.uut.DQ[7:0]
+@200
+-BAUD GENERATOR
 @28
-RX_tb.uut.RXC
-RX_tb.uut.RXD
-RX_tb.uut.RX_END
-RX_tb.uut.RX_SAMPLE
-RX_tb.uut.clk
+RX_tb.uut.BG_inst.CE
+RX_tb.uut.BG_inst.CLK
 @22
-RX_tb.uut.shift_reg[7:0]
+RX_tb.uut.BG_inst.D[7:0]
 @28
-RX_tb.uut.sum_mux_down
-RX_tb.uut.sum_mux_up
-RX_tb.uut.sum_r
+RX_tb.uut.BG_inst.SPE
+RX_tb.uut.BG_inst.ZD
+RX_tb.uut.BG_inst.ZD_r
+@22
+RX_tb.uut.BG_inst.counter_r[7:0]
+@200
+-
+-CONTROL UNIT 
+@28
+RX_tb.uut.CU_inst.CLK
+RX_tb.uut.CU_inst.RXC
+RX_tb.uut.CU_inst.RXD
+RX_tb.uut.CU_inst.RXD_prev_reg
+RX_tb.uut.CU_inst.RXEN
+RX_tb.uut.CU_inst.RXEN_reg
+RX_tb.uut.CU_inst.RXRDY
+RX_tb.uut.CU_inst.RXRDY_reg
+@22
+RX_tb.uut.CU_inst.data_cnt_reg[8:0]
+@28
+RX_tb.uut.CU_inst.ongoing_transmission_reg
+@200
+-
+-INPUT FILTER
+@28
+RX_tb.uut.IP_inst.CLK
+RX_tb.uut.IP_inst.RXC
+RX_tb.uut.IP_inst.RXD_IN
+RX_tb.uut.IP_inst.RXD_OUT
+RX_tb.uut.IP_inst.SR_R_w
+RX_tb.uut.IP_inst.SR_S_w
+RX_tb.uut.IP_inst.SR_r
+@200
+-
+@201
+-SHIFT REGISTER
+@28
+RX_tb.uut.SR_inst.CLK
+RX_tb.uut.SR_inst.DATA_IN
+@22
+RX_tb.uut.SR_inst.DATA_OUT[7:0]
+RX_tb.uut.SR_inst.DATA_OUT_r[7:0]
+@28
+RX_tb.uut.SR_inst.RXEN
 [pattern_trace] 1
 [pattern_trace] 0
