@@ -22,5 +22,6 @@ always @(posedge CLK) begin
         SR_r <= SR_S_w;
     end
 end
+assign RXD_OUT = SR_r;
 
 endmodule
