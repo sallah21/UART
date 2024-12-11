@@ -35,7 +35,7 @@ always @(posedge CLK) begin
         RXRDY_reg <= 1'b0;
         data_cnt_reg <= {{(SIZE-1){1'b0}}};
     end
-    if (data_cnt_reg >= SIZE ) begin
+    if (data_cnt_reg > SIZE ) begin
         ongoing_transmission_reg <= 1'b0;
         RXRDY_reg <= 1'b1;
         data_cnt_reg <=  {{(SIZE-1){1'b0}}};
