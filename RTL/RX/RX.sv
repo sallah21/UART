@@ -11,7 +11,7 @@ module RX (
   ///// Local Parameters
   //////////////////////////////////////////////////////////
   localparam SIZE = 8;
-  localparam FREQ_DIV_FACT = 9600; // Frequency Division factor
+  localparam FREQ_DIV_FACT = 10; // Frequency Division factor
 
   //////////////////////////////////////////////////////////
   ///// Input filter instance and logic
@@ -31,9 +31,10 @@ module RX (
   ///// Baud generator instance and logic
   //////////////////////////////////////////////////////////
 
-  reg [7:0] FDF_reg = FREQ_DIV_FACT;
-
-  BAUD_GENERATOR BG_inst (
+  reg [$clog2(FREQ_DIV_FACT):0] FDF_reg = FREQ_DIV_FACT;
+  BAUD_GENERATOR #(
+                   .FREQ_DIV_FACT(FREQ_DIV_FACT)
+                 ) BG_inst(
                    .CE(1),
                    .CLK(CLK),
                    .SPE(ZD_w),

@@ -28,27 +28,29 @@ initial begin
     $dumpfile("RX_tb.vcd");
     $dumpvars(0, RX_tb);
     // Initialize inputs
+    // @(posedge RX_READY);
     RXD = 0;
 
 
-    // Apply test vectors
-    #10 RXD = 1;
 
-    #10 RXD = 0;
+    // // Apply test vectors
+    // #10 RXD = 1;
 
-    #10 RXD = 1;
+    // #10 RXD = 0;
 
-    
-    // More test vectors to thoroughly test the module
-    #10 RXD = 0;
-
-    #10 RXD = 1;
-
-    #10 RXD = 0;
-
-    #10 RXD = 1;
+    // #10 RXD = 1;
 
     
+    // // More test vectors to thoroughly test the module
+    // #10 RXD = 0;
+
+    // #10 RXD = 1;
+
+    // #10 RXD = 0;
+
+    // #10 RXD = 1;
+
+    repeat (1000) @(posedge clk);
     // End the simulation after a few cycles
     #100 $finish;
 end
