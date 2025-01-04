@@ -4,7 +4,8 @@ module RX (
     input CLK,
     input RXD,
     output RX_READY,
-    output [7:0] DQ
+    output [7:0] DQ,
+    output FRAME_ERROR
   );
 
   //////////////////////////////////////////////////////////
@@ -63,7 +64,7 @@ module RX (
   //////////////////////////////////////////////////////////
 
   wire RXRDY_w;
-
+  wire FRAME_ERROR_w;
 
   CONTROL_UNIT #(
                  .SIZE(SIZE)
@@ -72,10 +73,12 @@ module RX (
                  .RXC(ZD_w),
                  .RXD(RXD_OUT_w),
                  .RXRDY(RXRDY_w),
-                 .RXEN(RXEN_w)
+                 .RXEN(RXEN_w),
+                 .FRAME_ERROR(FRAME_ERROR_w)
                );
 
   assign RX_READY = RXRDY_w;
+  assign FRAME_ERROR = FRAME_ERROR_w;
 
 
 endmodule
