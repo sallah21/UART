@@ -1,0 +1,32 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Sat Jan  4 19:32:39 2025
+[*]
+[dumpfile] "/Users/salsamon/ASIC/Metody_Komunikacji_w_Systemach_Cyfrowych/lab2_uart/INPUT_FILTER_tb.vcd"
+[dumpfile_mtime] "Sat Jan  4 19:31:46 2025"
+[dumpfile_size] 6276
+[savefile] "/Users/salsamon/ASIC/Metody_Komunikacji_w_Systemach_Cyfrowych/lab2_uart/INPUT_FILTER_tb.gtkw"
+[timestart] 0
+[size] 1904 942
+[pos] 1687 7
+*-20.000000 3958000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] INPUT_FILTER_tb.
+[sst_width] 253
+[signals_width] 161
+[sst_expanded] 1
+[sst_vpaned_height] 294
+@28
+INPUT_FILTER_tb.CLK
+@421
+INPUT_FILTER_tb.test_filter.clk_period
+@28
+INPUT_FILTER_tb.RXD_IN
+INPUT_FILTER_tb.RXD_OUT
+@200
+-Internal Signals
+@28
+INPUT_FILTER_tb.dut.SR_r
+INPUT_FILTER_tb.dut.SR_S_w
+INPUT_FILTER_tb.dut.SR_R_w
+[pattern_trace] 1
+[pattern_trace] 0
