@@ -32,7 +32,7 @@ INC #(.SIZE(4)) inc_inst (
 wire D_w;
 
 // Assemble frame: Start bit (0), Data (LSB first), Stop bit (1)
-wire [SIZE+1:0] tx_frame = {1'b1, TXDATA, 1'b0};
+wire [SIZE+1:0] tx_frame = {1'b0, TXDATA, 1'b0};
 
 MUX #(.SIZE(8)) MUX_inst (
      .TX_DATA(tx_frame),
@@ -46,7 +46,12 @@ MUX #(.SIZE(8)) MUX_inst (
 
 reg TXD_r = 1;
 always @(posedge TXC) begin
-    TXD_r <= D_w;
+    if (inc_ce) begin
+        TXD_r <= D_w;    
+    end
+    else begin
+        TXD_r <= 1;
+    end
 end
 
 assign TXD = TXD_r;

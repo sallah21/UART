@@ -16,6 +16,12 @@ iverilog -g2012 \
   RTL/TX/INC.sv \
   RTL/TX/MUX.sv \
   RTL/RX/Rx.v \
+  RTL/RX/CONTROL_UNIT.sv \
+  RTL/RX/DDS.sv \
+  RTL/RX/INPUT_FILTER.sv \
+  RTL/RX/MEDIAN_FILTER.sv \
+  RTL/RX/BAUD_GENERATOR.sv \
+  RTL/RX/SHIFT_REG.sv \
   SIM/tb_uart_tx_rx.sv \
   RTL/ClockDivider.v
 
@@ -34,7 +40,7 @@ else
     exit 1
 fi
 
-# # Open GTKWave if VCD file exists
-# if [ -f uart_tx_rx.vcd ]; then
-#     gtkwave uart_tx_rx.vcd &
-# fi
+# Open GTKWave if VCD file exists
+if [ -f uart_tx_rx.vcd ]; then
+    gtkwave RX_test.gtkw &
+fi

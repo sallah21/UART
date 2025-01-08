@@ -14,7 +14,7 @@ module DDS #(
     logic dds_clk_reg;
 
     // Phase accumulator implementation
-    always_ff @(posedge clk or negedge rst_n) begin
+    always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             phase_acc <= '0;
             dds_clk_reg <= 1'b0;

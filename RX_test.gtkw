@@ -1,0 +1,63 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Wed Jan  8 13:56:32 2025
+[*]
+[dumpfile] "/home/student/Documents/DS/S2/Metody_komunikacji_cyfrowej/Lab_2/uart_tx_rx.vcd"
+[dumpfile_mtime] "Wed Jan  8 13:56:11 2025"
+[dumpfile_size] 795979
+[savefile] "/home/student/Documents/DS/S2/Metody_komunikacji_cyfrowej/Lab_2/RX_test.gtkw"
+[timestart] 888000
+[size] 1848 1016
+[pos] -1 -1
+*-16.000000 1023000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_uart_tx_rx.
+[treeopen] tb_uart_tx_rx.rx_inst.
+[sst_width] 233
+[signals_width] 345
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@200
+-INPUT FILTER
+@28
+tb_uart_tx_rx.rx_inst.IP_inst.CLK
+tb_uart_tx_rx.rx_inst.IP_inst.RXC
+@200
+- DATA
+@28
+tb_uart_tx_rx.rx_inst.IP_inst.RXD_IN
+tb_uart_tx_rx.rx_inst.IP_inst.d1
+tb_uart_tx_rx.rx_inst.IP_inst.d2
+tb_uart_tx_rx.rx_inst.IP_inst.d3
+@200
+-OUT
+@28
+tb_uart_tx_rx.rx_inst.IP_inst.RXD_OUT
+tb_uart_tx_rx.rx_inst.IP_inst.SR_R_w
+tb_uart_tx_rx.rx_inst.IP_inst.SR_S_w
+tb_uart_tx_rx.rx_inst.IP_inst.SR_r
+@200
+-RX 
+@28
+tb_uart_tx_rx.rx_inst.CU_inst.CLK
+tb_uart_tx_rx.rx_inst.CU_inst.FRAME_ERROR
+tb_uart_tx_rx.rx_inst.CU_inst.RXC
+tb_uart_tx_rx.rx_inst.CU_inst.RXD
+tb_uart_tx_rx.rx_inst.CU_inst.RXD_prev_reg
+tb_uart_tx_rx.rx_inst.CU_inst.RXEN
+tb_uart_tx_rx.rx_inst.CU_inst.RXRDY
+@22
+tb_uart_tx_rx.rx_inst.CU_inst.data_cnt_reg[8:0]
+@28
+tb_uart_tx_rx.rx_inst.CU_inst.ongoing_transmission_reg
+@200
+-SHIFT REGISTER 
+@28
+tb_uart_tx_rx.rx_inst.SR_inst.CLK
+tb_uart_tx_rx.rx_inst.SR_inst.DATA_IN
+@22
+tb_uart_tx_rx.rx_inst.SR_inst.DATA_OUT[7:0]
+@28
+tb_uart_tx_rx.rx_inst.SR_inst.DATA_OUT_r[7:0]
+tb_uart_tx_rx.rx_inst.SR_inst.RXEN
+[pattern_trace] 1
+[pattern_trace] 0

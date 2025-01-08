@@ -1,70 +1,95 @@
-`timescale 1ns/100ps
+`timescale 1ns / 100ps
 
 module uart_rx (
-    input wire clk,
-    input wire reset,
-    input wire rx,
-    input wire tx_busy,
-    output reg [7:0] rx_data,
-    output reg rx_ready,
-    output reg error
-);
-    reg [3:0] bit_cnt;
-    reg [7:0] shift_reg;
-    reg [3:0] state;
+    input CLK,
+    input RXD,
+    input RXC,
+    input TX_BUSY,
+    output RX_READY,
+    output [7:0] DQ,
+    output FRAME_ERROR
+  );
 
-    localparam IDLE = 4'd0,
-               START = 4'd1,
-               DATA = 4'd2,
-               STOP = 4'd3;
+  //////////////////////////////////////////////////////////
+  ///// Local Parameters
+  //////////////////////////////////////////////////////////
+  localparam SIZE = 8;
+  localparam FREQ_DIV_FACT = 0; // Frequency Division factor
 
-    initial begin
-        state <= IDLE;
-        rx_ready <= 1'b0;
-        bit_cnt <= 4'd0;
-        shift_reg <= 8'd0;
-        error <= 1'b0;
-        rx_data <= 8'd0;
-    end
+  //////////////////////////////////////////////////////////
+  ///// Input filter instance and logic
+  //////////////////////////////////////////////////////////
 
-    always @(posedge clk or posedge reset) begin
-        if (!reset) begin
-            state <= IDLE;
-            rx_ready <= 1'b0;
-            bit_cnt <= 4'd0;
-            shift_reg <= 8'd0;
-            error <= 1'b0;
-            rx_data <= 8'd0;
-        end else begin
-            case (state)
-                IDLE: begin
-                    rx_ready <= 1'b1;
-                    if (~rx && tx_busy) state <= START; // Start bit detected
-                end
-                START: begin
-                    state <= DATA;
-                    bit_cnt <= 4'd0;
-                    shift_reg <= {rx, shift_reg[7:1]};
-                    rx_ready <= 1'b0;
-                end
-                DATA: begin
-                    // Shift in LSB first
-                    shift_reg <= {rx, shift_reg[7:1]};
-                    bit_cnt <= bit_cnt + 1;
-                    if (bit_cnt == 4'd6) state <= STOP;
-                end
-                STOP: begin
-                    if (rx) begin
-                        error <= 1'b0; // Stop bit detected
-                        rx_data <= shift_reg; // Data is already in correct order
-                        rx_ready <= 1'b1;
-                    end
-                    else begin 
-                        error <= 1'b1; // Error: Stop bit not detected
-                    end
-                    state <= IDLE;
-                end
-            endcase
-        end
-    end
+  wire RXD_OUT_w;
+  wire ZD_w; // May need to assign it into wires
+  wire RX_EN_IF = RXEN_w;
+
+  // INPUT_FILTER IP_inst (
+  //                .RXD_IN(RXD),
+  //                .RXC(RXC),
+  //                .RXEN(RX_EN_IF),
+  //                .CLK(CLK),
+  //                .RXD_OUT(RXD_OUT_w)
+  //              );
+
+  MEDIAN_FILTER IP_inst (
+    .RXD_IN(RXD),
+    .RXC(RXC),
+    .RXEN(RX_EN_IF),
+    .CLK(CLK),
+    .RXD_OUT(RXD_OUT_w)
+  );
+
+  //////////////////////////////////////////////////////////
+  ///// Baud generator instance and logic
+  //////////////////////////////////////////////////////////
+
+  reg [$clog2(FREQ_DIV_FACT):0] FDF_reg = FREQ_DIV_FACT;
+  BAUD_GENERATOR #(
+                   .FREQ_DIV_FACT(FREQ_DIV_FACT)
+                 ) BG_inst(
+                   .CE(1),
+                   .CLK(CLK),
+                   .SPE(ZD_w),
+                   .D(FDF_reg),
+                   .ZD(ZD_w)
+                 );
+
+  //////////////////////////////////////////////////////////
+  ///// Shift register instance and logic
+  //////////////////////////////////////////////////////////
+
+  wire [SIZE-1:0] DATA_OUT_w;
+  wire RXEN_w;
+  assign DQ = DATA_OUT_w;
+  SHIFT_REG #(
+              .SIZE(SIZE)
+            ) SR_inst (
+              .CLK(CLK),
+              .DATA_IN(RXD_OUT_w),
+              .RXEN(RXEN_w), 
+              .DATA_OUT(DATA_OUT_w)
+            );
+
+  //////////////////////////////////////////////////////////
+  ///// Control unit instance and logic
+  //////////////////////////////////////////////////////////
+
+  wire RXRDY_w;
+  wire FRAME_ERROR_w;
+
+  CONTROL_UNIT #(
+                 .SIZE(SIZE)
+               ) CU_inst (
+                 .CLK(CLK),
+                 .RXC(ZD_w),
+                 .TX_BUSY(TX_BUSY),
+                 .RXD(RXD_OUT_w),
+                 .RXRDY(RXRDY_w),
+                 .RXEN(RXEN_w),
+                 .FRAME_ERROR(FRAME_ERROR_w)
+               );
+
+  assign RX_READY = RXRDY_w;
+  assign FRAME_ERROR = FRAME_ERROR_w;
 endmodule

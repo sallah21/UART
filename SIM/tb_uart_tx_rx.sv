@@ -36,22 +36,30 @@ module tb_uart_tx_rx();
 
     // Instantiate RX
     uart_rx rx_inst (
-        .clk(clk),
-        .reset(reset),
-        .rx(txd),
-        .tx_busy(tx_busy),
-        .rx_data(rx_data),
-        .rx_ready(rx_ready),
-        .error(rx_error)
+        .CLK(clk),
+        .RXD(txd),
+        .RXC(rx_clk),
+        .RX_READY(rx_ready),
+        .DQ(rx_data),
+        .FRAME_ERROR(rx_error)
     );
+
+
 
     // Clock generation
     initial begin
         $display("Starting simulation...");
         clk = 0;
         forever #(CLK_PERIOD/2) clk = ~clk;
-  
     end
+
+    // Slower clock for RX generation
+    initial begin
+        $display("RX started");
+        rx_clk = 0;
+        forever #(CLK_PERIOD/6) rx_clk = ~rx_clk;
+    end
+
 
     // Monitor TXD bits for debugging
     always @(posedge clk) begin

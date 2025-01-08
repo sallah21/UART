@@ -6,6 +6,7 @@ module CONTROL_UNIT #(
     input CLK,
     input RXC,
     input RXD,
+    input TX_BUSY,
     output RXRDY,
     output RXEN,
     output FRAME_ERROR
@@ -17,9 +18,8 @@ reg            RXD_prev_reg;
 reg            ongoing_transmission_reg = 0;
 reg            RXRDY_reg = 1'b1;   
 reg            FRAME_ERROR_reg = 1'b0;
- // TODO: parity bit handling 
 
-always @(posedge RXC) begin
+always @(posedge CLK) begin
     RXD_prev_reg <= RXD;    
     if (ongoing_transmission_reg) begin 
         RXEN_reg <= 1'b1;
@@ -30,7 +30,8 @@ always @(posedge RXC) begin
     end
 end
 
-always @(posedge CLK) begin
+
+always @(posedge RXC) begin
 
     if ((RXD_prev_reg & !RXD) && !ongoing_transmission_reg) begin
         ongoing_transmission_reg <=1'b1;
