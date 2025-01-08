@@ -1,0 +1,65 @@
+`timescale 10ns / 100ps
+
+module uart_rx (
+    input wire clk,
+    input wire reset,
+    input wire rx,
+    output reg [7:0] rx_data,
+    output reg rx_ready,
+    output reg error
+);
+    reg [3:0] bit_cnt;
+    reg [9:0] shift_reg;
+    reg [3:0] state;
+
+    localparam IDLE = 4'd0,
+               START = 4'd1,
+               DATA = 4'd2,
+               STOP = 4'd3;
+
+    initial begin
+        state <= IDLE;
+        rx_ready <= 1'b0;
+        bit_cnt <= 4'd0;
+        shift_reg <= 10'd0;
+        error <= 1'b0;
+        rx_data <= 8'd0;
+    end
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            state <= IDLE;
+            rx_ready <= 1'b0;
+            bit_cnt <= 4'd0;
+            shift_reg <= 10'd0;
+            error <= 1'b0;
+        end else begin
+            case (state)
+                IDLE: begin
+                    rx_ready <= 1'b0;
+                    if (~rx) state <= START; // Start bit detected
+                end
+                START: begin
+                    state <= DATA;
+                    bit_cnt <= 4'd0;
+                end
+                DATA: begin
+                    shift_reg <= {rx, shift_reg[9:1]};
+                    bit_cnt <= bit_cnt + 1;
+                    if (bit_cnt == 4'd7) state <= STOP;
+                end
+                STOP: begin
+                    if (rx) begin
+                        error <= 1'b0; // Stop bit detected
+                        rx_data <= shift_reg[8:1]; // Extract data bits
+                        rx_ready <= 1'b1;
+                    end
+                    else begin 
+                        error <= 1'b1; // Error: Stop bit not detected
+                    end
+                    state <= IDLE;
+                end
+            endcase
+        end
+    end
+endmodule

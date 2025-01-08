@@ -1,0 +1,42 @@
+[*]
+[*] GTKWave Analyzer v3.3.48 (w)1999-2013 BSI
+[*] Mon Nov 11 16:08:00 2024
+[*]
+[dumpfile] "C:\Users\alert\OneDrive\Dokumenty\STUDIA\MKwSC\Lab2\ex1.vcd"
+[dumpfile_mtime] "Mon Nov 11 16:07:43 2024"
+[dumpfile_size] 610860
+[savefile] "C:\Users\alert\OneDrive\Dokumenty\STUDIA\MKwSC\Lab2\ex1.gtkw"
+[timestart] 0
+[size] 1280 657
+[pos] -1 -1
+*-25.158075 13610000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] EX1_tb.
+[sst_width] 197
+[signals_width] 166
+[sst_expanded] 1
+[sst_vpaned_height] 165
+@22
+EX1_tb.tx_mod.shift_reg[9:0]
+EX1_tb.tx_mod.bit_cnt[3:0]
+@28
+EX1_tb.tx_mod.tx_start
+@29
+EX1_tb.tx_mod.clk
+@28
+EX1_tb.tx_mod.reset
+@22
+EX1_tb.tx_mod.shift_reg[9:0]
+EX1_tb.tx_mod.state[3:0]
+@28
+EX1_tb.tx_mod.tx
+EX1_tb.tx_mod.tx_busy
+@22
+EX1_tb.tx_mod.tx_data[7:0]
+EX1_tb.rx_data[7:0]
+@28
+EX1_tb.clk_uart_rx
+EX1_tb.clk_uart_tx
+EX1_tb.clk
+EX1_tb.error
+[pattern_trace] 1
+[pattern_trace] 0
