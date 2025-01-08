@@ -36,7 +36,7 @@ module tb_uart_tx_rx();
 
     // Instantiate RX
     uart_rx rx_inst (
-        .clk(rx_clk),
+        .clk(clk),
         .reset(reset),
         .rx(txd),
         .tx_busy(tx_busy),
