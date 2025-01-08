@@ -1,4 +1,4 @@
-`timescale 10ns / 100ps
+`timescale 1ns/100ps
 
 module uart_rx (
     input wire clk,
@@ -9,7 +9,7 @@ module uart_rx (
     output reg error
 );
     reg [3:0] bit_cnt;
-    reg [9:0] shift_reg;
+    reg [7:0] shift_reg;
     reg [3:0] state;
 
     localparam IDLE = 4'd0,
@@ -21,7 +21,7 @@ module uart_rx (
         state <= IDLE;
         rx_ready <= 1'b0;
         bit_cnt <= 4'd0;
-        shift_reg <= 10'd0;
+        shift_reg <= 8'd0;
         error <= 1'b0;
         rx_data <= 8'd0;
     end
@@ -31,8 +31,9 @@ module uart_rx (
             state <= IDLE;
             rx_ready <= 1'b0;
             bit_cnt <= 4'd0;
-            shift_reg <= 10'd0;
+            shift_reg <= 8'd0;
             error <= 1'b0;
+            rx_data <= 8'd0;
         end else begin
             case (state)
                 IDLE: begin
@@ -42,16 +43,18 @@ module uart_rx (
                 START: begin
                     state <= DATA;
                     bit_cnt <= 4'd0;
+                    shift_reg <= 8'd0;
                 end
                 DATA: begin
-                    shift_reg <= {rx, shift_reg[9:1]};
+                    // Shift in LSB first
+                    shift_reg <= {rx, shift_reg[7:1]};
                     bit_cnt <= bit_cnt + 1;
                     if (bit_cnt == 4'd7) state <= STOP;
                 end
                 STOP: begin
                     if (rx) begin
                         error <= 1'b0; // Stop bit detected
-                        rx_data <= shift_reg[8:1]; // Extract data bits
+                        rx_data <= shift_reg; // Data is already in correct order
                         rx_ready <= 1'b1;
                     end
                     else begin 

@@ -1,4 +1,4 @@
-`timescale 1ns / 100ps
+`timescale 1ns/100ps
 module TX #(
     parameter int SIZE = 8
 ) (
@@ -31,8 +31,11 @@ INC #(.SIZE(4)) inc_inst (
 
 wire D_w;
 
+// Assemble frame: Start bit (0), Data (LSB first), Stop bit (1)
+wire [SIZE+1:0] tx_frame = {1'b1, TXDATA, 1'b0};
+
 MUX #(.SIZE(8)) MUX_inst (
-     .TX_DATA({1'b0,{TXDATA}, 1'b1}),
+     .TX_DATA(tx_frame),
      .ADDR(Q_w),
      .D(D_w)
 );

@@ -8,6 +8,7 @@ module MUX #(
     input [$clog2(SIZE):0] ADDR,
     output D
 );
-wire D_w = TX_DATA[(SIZE+1)-ADDR] ;
+// Send LSB first
+wire D_w = TX_DATA[ADDR];
 assign D = D_w;
 endmodule
