@@ -4,6 +4,7 @@ module uart_rx (
     input wire clk,
     input wire reset,
     input wire rx,
+    input wire tx_busy,
     output reg [7:0] rx_data,
     output reg rx_ready,
     output reg error
@@ -27,7 +28,7 @@ module uart_rx (
     end
 
     always @(posedge clk or posedge reset) begin
-        if (reset) begin
+        if (!reset) begin
             state <= IDLE;
             rx_ready <= 1'b0;
             bit_cnt <= 4'd0;
@@ -37,19 +38,20 @@ module uart_rx (
         end else begin
             case (state)
                 IDLE: begin
-                    rx_ready <= 1'b0;
-                    if (~rx) state <= START; // Start bit detected
+                    rx_ready <= 1'b1;
+                    if (~rx && tx_busy) state <= START; // Start bit detected
                 end
                 START: begin
                     state <= DATA;
                     bit_cnt <= 4'd0;
-                    shift_reg <= 8'd0;
+                    shift_reg <= {rx, shift_reg[7:1]};
+                    rx_ready <= 1'b0;
                 end
                 DATA: begin
                     // Shift in LSB first
                     shift_reg <= {rx, shift_reg[7:1]};
                     bit_cnt <= bit_cnt + 1;
-                    if (bit_cnt == 4'd7) state <= STOP;
+                    if (bit_cnt == 4'd6) state <= STOP;
                 end
                 STOP: begin
                     if (rx) begin

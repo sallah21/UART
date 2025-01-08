@@ -38,6 +38,7 @@ module tb_uart_tx_rx();
         .clk(clk),
         .reset(reset),
         .rx(txd),
+        .tx_busy(tx_busy),
         .rx_data(rx_data),
         .rx_ready(rx_ready),
         .error(rx_error)
@@ -86,16 +87,16 @@ module tb_uart_tx_rx();
         $display("Initializing signals...");
         tx_data = 0;
         tx_rq = 0;
-        reset = 1;
+        reset = 0;
         data_received = 0;
         bit_count = 0;
         received_frame = 0;
         
         // Wait and release reset
-        repeat(5) @(posedge clk);
+        repeat(50) @(posedge clk);
         $display("Time %t: Releasing reset...", $time);
-        reset = 0;
-        repeat(5) @(posedge clk);
+        reset = 1;
+        repeat(50) @(posedge clk);
 
         // Send test data
         $display("Time %t: Starting test transmission of 0xA5 = %b", $time, 8'hA5);

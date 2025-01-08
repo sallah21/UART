@@ -44,7 +44,7 @@ MUX #(.SIZE(8)) MUX_inst (
 //////// OUTPUT REG LOGIC 
 ////////////////////////////////////////////////////////////////
 
-reg TXD_r;
+reg TXD_r = 1;
 always @(posedge TXC) begin
     TXD_r <= D_w;
 end
