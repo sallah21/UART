@@ -16,7 +16,8 @@ iverilog -g2012 \
   RTL/TX/INC.sv \
   RTL/TX/MUX.sv \
   RTL/RX/Rx.v \
-  SIM/tb_uart_tx_rx.sv
+  SIM/tb_uart_tx_rx.sv \
+  RTL/ClockDivider.v
 
 if [ $? -eq 0 ]; then
     echo "Compilation successful, running simulation..."
@@ -33,7 +34,7 @@ else
     exit 1
 fi
 
-# Open GTKWave if VCD file exists
-if [ -f uart_tx_rx.vcd ]; then
-    gtkwave uart_tx_rx.vcd &
-fi
+# # Open GTKWave if VCD file exists
+# if [ -f uart_tx_rx.vcd ]; then
+#     gtkwave uart_tx_rx.vcd &
+# fi

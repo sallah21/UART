@@ -1,3 +1,6 @@
 *.txt
 TX_tb
 *.vcd
+Quartus_files/output_files/*
+Quartus_files/db/*
+Quartus_files/incremental_db/*

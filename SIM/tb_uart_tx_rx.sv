@@ -11,6 +11,7 @@ module tb_uart_tx_rx();
     wire tx_busy;
     reg tx_rq;
     reg clk;
+    reg rx_clk;
     wire txd;
     reg reset;
     wire [7:0] rx_data;
@@ -35,7 +36,7 @@ module tb_uart_tx_rx();
 
     // Instantiate RX
     uart_rx rx_inst (
-        .clk(clk),
+        .clk(rx_clk),
         .reset(reset),
         .rx(txd),
         .tx_busy(tx_busy),
@@ -49,6 +50,7 @@ module tb_uart_tx_rx();
         $display("Starting simulation...");
         clk = 0;
         forever #(CLK_PERIOD/2) clk = ~clk;
+  
     end
 
     // Monitor TXD bits for debugging

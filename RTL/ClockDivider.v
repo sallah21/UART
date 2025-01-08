@@ -9,8 +9,8 @@ module ClockDivider #(parameter DIVISOR = 250) // Default
     // Counter to keep track of clock cycles
     integer counter = 0;
 
-    always @(posedge clk_50MHz or posedge reset) begin
-        if (reset) begin
+    always @(posedge clk or negedge reset) begin
+        if (!reset) begin
             counter <= 0;
             clk_uart <= 0;
         end else begin
